@@ -1,0 +1,13 @@
+Relative GIT Repository,Layer subdirectory in repository,Tag/Branch to checkout in develop MSC-LDK branch
+thirdparty/meta-freescale,,sumo-4.14.78-1.0.0_ga
+thirdparty/meta-freescale-distro,,sumo-4.14.78-1.0.0_ga
+thirdparty/meta-fsl-bsp-release,imx/meta-bsp,sumo-msc
+thirdparty/meta-fsl-bsp-release,imx/meta-sdk,sumo-msc
+thirdparty/meta-browser,,sumo-4.14.78-1.0.0_ga
+thirdparty/meta-qt5,,
+thirdparty/meta-qt5-extra,,
+msc_ol99/meta-msc-arm-extensions,,
+thirdparty/meta-openembedded,meta-oe,
+thirdparty/meta-openembedded,meta-networking,
+thirdparty/meta-openembedded,meta-python,
+thirdparty/meta-openembedded,meta-multimedia,

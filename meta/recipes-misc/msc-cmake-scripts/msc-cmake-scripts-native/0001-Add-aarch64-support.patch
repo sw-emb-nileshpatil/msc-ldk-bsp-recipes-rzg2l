@@ -1,0 +1,35 @@
+From ab719520f2902c5bacb30cd5328b5a37b1d1ecd8 Mon Sep 17 00:00:00 2001
+From: Waldemar Glensk <waldemar.glensk@avnet.com>
+Date: Mon, 18 Feb 2019 13:43:27 +0100
+Subject: [PATCH] Add aarch64 support.
+
+---
+ src/msc_linux.cmake | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/src/msc_linux.cmake b/src/msc_linux.cmake
+index 680612a..a01a72b 100644
+--- a/src/msc_linux.cmake
++++ b/src/msc_linux.cmake
+@@ -34,7 +34,7 @@ msc_execute_process(
+ set(LINUX_KARCH_DEFAULT "${EXEC_OUTPUT}")
+ 
+ # overwrite LINUX_KARCH_DEFAULT with cross-compiler setting
+-if(NOT(LINUX_KARCH))
++#if(NOT(LINUX_KARCH))
+   if(LINUX_CROSS_COMPILE)
+     if(LINUX_CROSS_COMPILE MATCHES "arm.*")
+       set(LINUX_KARCH_DEFAULT "arm")
+@@ -42,9 +42,11 @@ if(NOT(LINUX_KARCH))
+       set(LINUX_KARCH_DEFAULT "mips")
+     elseif(LINUX_CROSS_COMPILE MATCHES "powerpc.*")
+       set(LINUX_KARCH_DEFAULT "powerpc")
++    elseif(LINUX_CROSS_COMPILE MATCHES "aarch64.*")
++      set(LINUX_KARCH_DEFAULT "arm64")      
+     endif()
+   endif()
+-endif()
++#endif()
+ 
+ if(NOT(LINUX_KARCH))
+   message("-- Auto Setting Linux KARCH to ${LINUX_KARCH_DEFAULT}")
