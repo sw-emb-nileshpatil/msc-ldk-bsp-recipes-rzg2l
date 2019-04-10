@@ -3,7 +3,7 @@
 
 SRCBRANCH = "msc-imx_4.14.78_1.0.0_ga-develop"
 KERNEL_SRC = "git://git@destsm3ux05bbct.emea.avnet.com:7999/thirdparty/linux-imx.git;protocol=ssh"
-SRCREV = "da0ce91f6d0923711ca55abb50e8c33a2daf7e2c"
+SRCREV = "aab20ae87370cd9dd844454d5a437078f63a9d58"
 
 do_copy_defconfig () {
 	mkdir -p ${B}
