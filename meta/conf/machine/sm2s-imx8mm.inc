@@ -54,7 +54,8 @@ IMAGE_INSTALL_append += " \
 	weston \
 	weston-init \
 	weston-examples \
-	\
+	devmem2 \
+	memtester \
 	"
 
 IMAGE_INSTALL_remove += " peak-linux-driver "
