@@ -9,6 +9,10 @@ include conf/machine/include/imx-preferred-env.inc
 KERNEL_DEVICETREE += " \
 	msc/msc-sm2s-imx8mm-qc-001.dtb \
 	msc/msc-sm2s-imx8mm-qc-001-ep1.dtb \
+	msc/msc-sm2s-imx8mm-qc-001-rm67191.dtb \
+	msc/msc-sm2s-imx8mm-qc-002.dtb \
+	msc/msc-sm2s-imx8mm-qc-002-ep1.dtb \
+	msc/msc-sm2s-imx8mm-qc-002-rm67191.dtb \
 	"
 
 UBOOT_CONFIG ??= "sd"
