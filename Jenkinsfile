@@ -1,5 +1,5 @@
 msc_ldk {
     buildtargets = '[ \
-                      [ "base", "", "", "msc-image-base" ], \
+                      [ "base", "", "", "msc-image-base" ] \
                     ]'
 }
