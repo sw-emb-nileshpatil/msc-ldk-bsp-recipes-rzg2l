@@ -3,6 +3,6 @@
 require ../../../../../meta-msc-ldk-core-recipes.git/msc-git.inc
 require msc-git-src.inc
 
-SRCREV = "18c3d293be38fbfb2a5aba5b2f9d2719db36f28d"
+SRCREV = "12a157510f2bf0444f57d65c953dfb62eebb8c36"
 
 DEPENDS = "zlib-native openssl-native"

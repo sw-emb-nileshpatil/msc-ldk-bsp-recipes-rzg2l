@@ -34,5 +34,5 @@ $(IMAGE_TYPES_FOR_WAYLAND):
 	@./build.sh bitbake ${BITBAKE_FLAGS} $@
 
 .PHONY: msc-sm2s-imx8mm-wayland
-msc-sm2s-imx8m-wayland:
+msc-sm2s-imx8mm-wayland:
 	make ${IMAGE_TYPES_FOR_WAYLAND}
