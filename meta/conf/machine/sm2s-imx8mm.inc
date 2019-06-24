@@ -9,11 +9,10 @@ include conf/machine/include/imx-preferred-env.inc
 KERNEL_DEVICETREE += " \
 	msc/msc-sm2s-imx8mm-qc-001.dtb \
 	msc/msc-sm2s-imx8mm-qc-001-ep1.dtb \
-	msc/msc-sm2s-imx8mm-qc-001-lvds-am1024600ltm-pattern.dtb \
+	msc/msc-sm2s-imx8mm-qc-001-lvds-aa090tb01.dtb \
 	msc/msc-sm2s-imx8mm-qc-001-lvds-am1024600ltm.dtb \
-	msc/msc-sm2s-imx8mm-qc-001-lvds-lb070w-pattern.dtb \
+	msc/msc-sm2s-imx8mm-qc-001-lvds-ama121a01.dtb \
 	msc/msc-sm2s-imx8mm-qc-001-lvds-lb070w.dtb \
-	msc/msc-sm2s-imx8mm-qc-002.dtb \
 	msc/msc-sm2s-imx8mm-qc-002-ep1.dtb \
 	msc/msc-sm2s-imx8mm-qc-002-rm67191.dtb \
 	"
