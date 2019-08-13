@@ -32,6 +32,10 @@ mkdir -p ${LOG_DIR}
 DATE=$(date "+%Y-%m-%d-%H-%M")
 TESTAPP_LOG_FILE="${LOG_DIR}/testapp-${DATE}.log"
 
+rm /etc/system-test-controller.d -rf
+rm /etc/system-test-controller.cfg
+ifconfig eth0 192.168.100.50
+
 for sd in  a b; do
     dev=/dev/sd${sd}1
     if [ -b $dev ] ; then
@@ -49,5 +53,9 @@ done
 
 . /etc/profile.d/weston.sh
 . /etc/profile.d/qt5.sh
+
+./start-video0.sh &
+
+sleep 3s
 
 ./qt-test-application &>${TESTAPP_LOG_FILE} &

@@ -8,7 +8,8 @@ inherit update-rc.d
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI_append = " \
 	file://start.sh \
-	file://stop.sh \	
+	file://stop.sh \
+	file://start-video0.sh \
 	file://config.ini \
 	file://system-test-controller \
 	file://scripts \
