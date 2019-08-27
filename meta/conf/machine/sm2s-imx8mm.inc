@@ -15,6 +15,10 @@ KERNEL_DEVICETREE += " \
 	msc/msc-sm2s-imx8mm-qc-001-lvds-lb070w.dtb \
 	msc/msc-sm2s-imx8mm-qc-002-ep1.dtb \
 	msc/msc-sm2s-imx8mm-qc-002-rm67191.dtb \
+	msc/msc-sm2s-imx8mm-qc-13N4200I.dtb \
+	msc/msc-sm2s-imx8mm-qc-13N4200I-lvds-ama121a01.dtb \
+	msc/msc-sm2s-imx8mm-qc-14N0261I.dtb \
+	msc/msc-sm2s-imx8mm-qc-14N0261I-lvds-ama121a01.dtb \
 	"
 
 UBOOT_CONFIG ??= "sd"
