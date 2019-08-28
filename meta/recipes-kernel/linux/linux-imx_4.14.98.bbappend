@@ -4,7 +4,7 @@
 require ../../../../../meta-msc-ldk-core-recipes.git/msc-git.inc
 require msc-git-src.inc
 
-SRCREV = "ae61725629fe3c57e1fea3fa505ca15b0db43144"
+SRCREV = "0e32dc03a4cdc51a4620bc6126bfc7e2e0d59469"
 
 do_copy_defconfig () {
 	mkdir -p ${B}
