@@ -17,6 +17,7 @@ KERNEL_DEVICETREE += " \
 	msc/msc-sm2s-imx8mm-qc-002-rm67191.dtb \
 	msc/msc-sm2s-imx8mm-qc-13N4200I.dtb \
 	msc/msc-sm2s-imx8mm-qc-13N4200I-lvds-ama121a01.dtb \
+	msc/msc-sm2s-imx8mm-qc-13N4200I-lvds-am800480n7.dtb \
 	msc/msc-sm2s-imx8mm-qc-14N0261I.dtb \
 	msc/msc-sm2s-imx8mm-qc-14N0261I-lvds-ama121a01.dtb \
 	"
@@ -66,6 +67,7 @@ IMAGE_INSTALL_append += " \
 	weston-examples \
 	devmem2 \
 	memtester \
+	test-suite \
 	"
 
 IMAGE_INSTALL_remove += " peak-linux-driver "
