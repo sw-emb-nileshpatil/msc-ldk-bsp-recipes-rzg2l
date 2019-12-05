@@ -7,19 +7,24 @@
 include conf/machine/include/imx-preferred-env.inc
 
 KERNEL_DEVICETREE += " \
-	msc/msc-sm2s-imx8mm-qc-001.dtb \
-	msc/msc-sm2s-imx8mm-qc-001-ep1.dtb \
-	msc/msc-sm2s-imx8mm-qc-001-lvds-aa090tb01.dtb \
 	msc/msc-sm2s-imx8mm-qc-001-lvds-am1024600ltm.dtb \
+	msc/msc-sm2s-imx8mm-qc-001-lvds-am800480n7.dtb \
 	msc/msc-sm2s-imx8mm-qc-001-lvds-ama121a01.dtb \
 	msc/msc-sm2s-imx8mm-qc-001-lvds-lb070w.dtb \
-	msc/msc-sm2s-imx8mm-qc-002-ep1.dtb \
-	msc/msc-sm2s-imx8mm-qc-002-rm67191.dtb \
-	msc/msc-sm2s-imx8mm-qc-13N4200I.dtb \
-	msc/msc-sm2s-imx8mm-qc-13N4200I-lvds-ama121a01.dtb \
+	msc/msc-sm2s-imx8mm-dc-03N4200I-lvds-am800480n7.dtb \
+	msc/msc-sm2s-imx8mm-dc-03N4200I-lvds-ama121a01.dtb \
+	msc/msc-sm2s-imx8mm-dc-03N4200I.dtb \
 	msc/msc-sm2s-imx8mm-qc-13N4200I-lvds-am800480n7.dtb \
-	msc/msc-sm2s-imx8mm-qc-14N0261I.dtb \
+	msc/msc-sm2s-imx8mm-qc-13N4200I-lvds-ama121a01.dtb \
+	msc/msc-sm2s-imx8mm-qc-13N4200I-dsi-tm055jvhg14.dtb \
+	msc/msc-sm2s-imx8mm-qc-13N4200I.dtb \
 	msc/msc-sm2s-imx8mm-qc-14N0261I-lvds-ama121a01.dtb \
+	msc/msc-sm2s-imx8mm-qc-14N0261I.dtb \
+	msc/msc-sm2s-imx8mm-sc-03N4210I-lvds-am800480n7.dtb \
+	msc/msc-sm2s-imx8mm-sc-03N4210I-lvds-ama121a01.dtb \
+	msc/msc-sm2s-imx8mm-sc-03N4210I.dtb \
+	msc/msc-sm2s-imx8mm-scl-03N0880I-dsi-rm67192.dtb \
+	msc/msc-sm2s-imx8mm-scl-03N0880I.dtb \
 	"
 
 UBOOT_CONFIG ??= "sd"
