@@ -20,6 +20,7 @@ KERNEL_DEVICETREE += " \
 	msc/msc-sm2s-imx8mm-qc-13N4200I.dtb \
 	msc/msc-sm2s-imx8mm-qc-14N0261I-lvds-ama121a01.dtb \
 	msc/msc-sm2s-imx8mm-qc-14N0261I.dtb \
+	msc/msc-sm2s-imx8mm-qc-03N0840E.dtb \
 	msc/msc-sm2s-imx8mm-sc-03N4210I-lvds-am800480n7.dtb \
 	msc/msc-sm2s-imx8mm-sc-03N4210I-lvds-ama121a01.dtb \
 	msc/msc-sm2s-imx8mm-sc-03N4210I.dtb \
