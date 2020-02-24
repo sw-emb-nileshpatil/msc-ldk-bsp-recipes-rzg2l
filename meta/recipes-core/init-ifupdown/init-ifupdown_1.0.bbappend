@@ -1,3 +1,5 @@
+# Copyright (C) 2020 AVNET Integrated, MSC Technologies GmbH
+
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI += " \
 	file://interfaces \

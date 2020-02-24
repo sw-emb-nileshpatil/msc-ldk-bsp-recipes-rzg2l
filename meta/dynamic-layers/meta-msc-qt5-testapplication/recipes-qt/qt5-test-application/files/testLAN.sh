@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #   @copyright  Copyright (C) 2017 by MSC Technologies GmbH
-#   @author     Waldemar Glensk <waldemar.glensk@msc-technologies.eu>
+#   @author     Waldemar Glensk <waldemar.glensk@avnet.com>
 #
 #   GPL License
 #

@@ -1,5 +1,5 @@
 #
-#    @copyright  Copyright (C) 2019 by AVNET Integrated, MSC Technologies GmbH
+#    @copyright  Copyright (C) 2020 by AVNET Integrated, MSC Technologies GmbH
 #
 #    Alle Rechte vorbehalten. Dieses Dokument ist Eigentum der
 #    MSC Technologies GmbH und unterliegt dem Schutz des Urheberrechtes. Die
@@ -18,9 +18,9 @@
 #    All rights are reserved in the event of the grant of a patent or the
 #    registration of a utility model or design.
 #
-#    @date        2019
+#    @date        2020
 #
-#    @author      Waldemar Glensk <waldemar.glensk@msc-technologies.eu>
+#    @author      Waldemar Glensk <waldemar.glensk@avnet.com>
 #
 IMAGE_TYPES_FOR_ALL ?= msc-image-base
 IMAGE_TYPES_FOR_WAYLAND ?= msc-image-qt5

@@ -1,5 +1,5 @@
-# Copyright (C) 2019 AVNET Integrated, MSC Technologies GmbH
-AUTHOR = "Waldemar Glensk <waldemar.glensk@msc-technologies.eu>"
+# Copyright (C) 2020 AVNET Integrated, MSC Technologies GmbH
+AUTHOR = "Waldemar Glensk <waldemar.glensk@avnet.com>"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 

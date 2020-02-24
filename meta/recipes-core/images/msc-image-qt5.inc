@@ -1,4 +1,4 @@
-# Copyright (C) 2019 AVNET Integrated, MSC Technologies GmbH
+# Copyright (C) 2020 AVNET Integrated, MSC Technologies GmbH
 LICENSE = "MIT"
 
 ## Select Image Features

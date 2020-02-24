@@ -1,22 +1,22 @@
 #!/bin/sh
-#
 # Copyright (C) 2020 AVNET Integrated, MSC Technologies GmbH
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as
 # published by the Free Software Foundation version 2.
-#
+# 
 # This program is distributed "as is" WITHOUT ANY WARRANTY of any
 # kind, whether express or implied; without even the implied warranty
 # of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 
-. /etc/profile.d/weston.sh
+EMMC_DEV="mmcblk0"
+BOOT_PART="${EMMC_DEV}boot0"
+IMAGE="imx-boot-sm2s-imx8m-qc-sd.bin-flash-sm2s-imx8m-hdmi"
 
-gst-launch-1.0 v4l2src device=/dev/video0 ! \
-	video/x-raw,width=640,height=480 ! \
-	videobox left=-1 right=-1 border-alpha=1 ! \
-	glimagesink \
-			&>/dev/null
-
+echo 0 > /sys/block/${BOOT_PART}/force_ro
+dd if=/dev/zero of=/dev/${BOOT_PART} &>/dev/null
+dd if=${IMAGE} of=/dev/${BOOT_PART} bs=1k seek=33 conv=fsync
+mmc bootpart enable 1 0 /dev/${EMMC_DEV}
+echo 1 > /sys/block/${BOOT_PART}/force_ro

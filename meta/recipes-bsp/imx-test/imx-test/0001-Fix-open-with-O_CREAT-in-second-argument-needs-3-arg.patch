@@ -1,0 +1,22 @@
+From f102f989e70c0afa33ef2a8eb899a91ca0989ab0 Mon Sep 17 00:00:00 2001
+From: Waldemar Glensk <waldemar.glensk@avnet.com>
+Date: Wed, 19 Feb 2020 13:03:06 +0100
+Subject: [PATCH] Fix open with O_CREAT in second argument needs 3 arguments.
+
+---
+ test/mxc_v4l2_test/mx8_v4l2_cap_drm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/test/mxc_v4l2_test/mx8_v4l2_cap_drm.c b/test/mxc_v4l2_test/mx8_v4l2_cap_drm.c
+index 6e10744..1dba7ff 100644
+--- a/test/mxc_v4l2_test/mx8_v4l2_cap_drm.c
++++ b/test/mxc_v4l2_test/mx8_v4l2_cap_drm.c
+@@ -564,7 +564,7 @@ static int open_save_file(struct video_channel *video_ch)
+ #ifdef BUILD_FOR_ANDROID
+ 			fd = open(video_ch[i].save_file_name, O_RDWR | O_CREAT, 0660);
+ #else
+-			fd = open(video_ch[i].save_file_name, O_RDWR | O_CREAT);
++			fd = open(video_ch[i].save_file_name, O_RDWR | O_CREAT, 0660);
+ #endif
+ 			if (fd < 0) {
+ 				 v4l2_err("Channel[%d] unable to create recording file\n", i);

@@ -1,5 +1,5 @@
-# Copyright (C) 2019 AVNET Integrated, MSC Technologies GmbH
+# Copyright (C) 2020 AVNET Integrated, MSC Technologies GmbH
 
 RDEPENDS_${PN}_remove = " \
-    hwtest-audio \
-    "
+	hwtest-audio \
+	"
