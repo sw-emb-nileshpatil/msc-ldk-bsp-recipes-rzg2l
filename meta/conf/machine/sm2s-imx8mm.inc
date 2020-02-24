@@ -89,4 +89,5 @@ ROOTFS_POSTPROCESS_COMMAND_remove += " remove_boot; "
 # temporary
 IMAGE_INSTALL_remove += " \
 	linux-tools-testusb \
+	qt-gstreamer \
 	"
