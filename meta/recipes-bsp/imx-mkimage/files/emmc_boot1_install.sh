@@ -13,7 +13,7 @@
 
 EMMC_DEV="mmcblk0"
 BOOT_PART="${EMMC_DEV}boot1"
-IMAGE="imx-boot-sm2s-imx8m-qc-sd.bin-flash-sm2s-imx8m-hdmi"
+IMAGE="imx-boot-sm2s-imx8mm-qc-sd.bin-flash_board"
 
 echo 0 > /sys/block/${BOOT_PART}/force_ro
 dd if=/dev/zero of=/dev/${BOOT_PART} &>/dev/null

@@ -81,6 +81,7 @@ IMAGE_INSTALL_append += " \
 	i210-armtool \
 	i210-config \
 	test-suite \
+	imx-boot \
 	"
 
 IMAGE_INSTALL_remove += " peak-linux-driver "
