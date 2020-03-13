@@ -82,6 +82,7 @@ IMAGE_INSTALL_append += " \
 	i210-config \
 	test-suite \
 	imx-boot \
+	fb-test \
 	"
 
 IMAGE_INSTALL_remove += " peak-linux-driver "
