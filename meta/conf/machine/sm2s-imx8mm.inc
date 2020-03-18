@@ -6,38 +6,30 @@
 
 include conf/machine/include/imx-preferred-env.inc
 
-# QC variants
-KERNEL_DEVICETREE += " \
-	msc/imx8mm/msc-sm2s-imx8mm-qc-13N4200I-lvds-am800480n7.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-qc-13N4200I-lvds-ama121a01.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-qc-13N4200I-dsi-tm055jvhg14.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-qc-13N4200I.dtb \
+
+KERNEL_DEVICETREE = " \
+	msc/imx8mm/msc-sm2s-imx8mm-03N0840E-dsi-avd-tt78qt.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-03N0840E-headless.dtb \
 	\
-	msc/imx8mm/msc-sm2s-imx8mm-qc-14N0261I-lvds-ama070a04.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-qc-14N0261I-lvds-ama121a01.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-qc-14N0261I.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-03N0880I-dsi-rm67192.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-03N0880I-headless.dtb \
 	\
-	msc/imx8mm/msc-sm2s-imx8mm-qc-03N0840E-dsi-avd-tt78qt.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-qc-03N0840E.dtb \
-	"
-
-# DC variants
-KERNEL_DEVICETREE += " \
-	msc/imx8mm/msc-sm2s-imx8mm-dc-03N4200I-lvds-am800480n7.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-dc-03N4200I-lvds-ama121a01.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-dc-03N4200I.dtb \
-	"
-
-# SC variants
-KERNEL_DEVICETREE += " \
-	msc/imx8mm/msc-sm2s-imx8mm-sc-03N4210I-lvds-am800480n7.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-sc-03N4210I-lvds-ama121a01.dtb \
-	"
-
-# SCL variants
-KERNEL_DEVICETREE += " \
-	msc/imx8mm/msc-sm2s-imx8mm-scl-03N0880I-dsi-rm67192.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-scl-03N0880I.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-03N4200I-headless.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-03N4200I-lvds-am800480n7.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-03N4200I-lvds-ama121a01.dtb \
+	\
+	msc/imx8mm/msc-sm2s-imx8mm-03N4210I-headless.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-03N4210I-lvds-am800480n7.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-03N4210I-lvds-ama121a01.dtb \
+	\
+	msc/imx8mm/msc-sm2s-imx8mm-13N4200I-dsi-tm055jvhg14.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-13N4200I-headless.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-13N4200I-lvds-am800480n7.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-13N4200I-lvds-ama121a01.dtb \
+	\
+	msc/imx8mm/msc-sm2s-imx8mm-14N0261I-headless.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-14N0261I-lvds-ama070a04.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-14N0261I-lvds-ama121a01.dtb \
 	"
 
 UBOOT_CONFIG ??= "sd"
