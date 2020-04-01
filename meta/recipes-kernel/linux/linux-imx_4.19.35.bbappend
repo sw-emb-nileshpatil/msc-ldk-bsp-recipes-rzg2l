@@ -5,5 +5,4 @@ require ../../../../../meta-msc-ldk-core-recipes.git/msc-git.inc
 require msc-git-src.inc
 
 DEFCONFIG = "msc_sm2s_imx8m_defconfig"
-SRCREV = "dbf1cb1595ea4df97cac66271c8a1c88518693c8"
-
+SRCREV = "8793f0ed958a0889b26b3d05e9c67938065b375e"
