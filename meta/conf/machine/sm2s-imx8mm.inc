@@ -75,6 +75,8 @@ IMAGE_INSTALL_append += " \
 	test-suite \
 	imx-boot \
 	fb-test \
+	iproute2 \
+	can-utils \
 	"
 
 IMAGE_INSTALL_remove += " peak-linux-driver "
