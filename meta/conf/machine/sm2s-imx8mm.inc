@@ -17,19 +17,23 @@ KERNEL_DEVICETREE = " \
 	msc/imx8mm/msc-sm2s-imx8mm-03N4200I-headless.dtb \
 	msc/imx8mm/msc-sm2s-imx8mm-03N4200I-lvds-am800480n7.dtb \
 	msc/imx8mm/msc-sm2s-imx8mm-03N4200I-lvds-ama121a01.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-03N4200I-lvds-p251hvn01.dtb \
 	\
 	msc/imx8mm/msc-sm2s-imx8mm-03N4210I-headless.dtb \
 	msc/imx8mm/msc-sm2s-imx8mm-03N4210I-lvds-am800480n7.dtb \
 	msc/imx8mm/msc-sm2s-imx8mm-03N4210I-lvds-ama121a01.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-03N4210I-lvds-p251hvn01.dtb \
 	\
 	msc/imx8mm/msc-sm2s-imx8mm-13N4200I-dsi-tm055jvhg14.dtb \
 	msc/imx8mm/msc-sm2s-imx8mm-13N4200I-headless.dtb \
 	msc/imx8mm/msc-sm2s-imx8mm-13N4200I-lvds-am800480n7.dtb \
 	msc/imx8mm/msc-sm2s-imx8mm-13N4200I-lvds-ama121a01.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-13N4200I-lvds-p251hvn01.dtb \
 	\
 	msc/imx8mm/msc-sm2s-imx8mm-14N0261I-headless.dtb \
 	msc/imx8mm/msc-sm2s-imx8mm-14N0261I-lvds-ama070a04.dtb \
 	msc/imx8mm/msc-sm2s-imx8mm-14N0261I-lvds-ama121a01.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-14N0261I-lvds-p251hvn01.dtb \
 	"
 
 UBOOT_CONFIG ??= "sd"
