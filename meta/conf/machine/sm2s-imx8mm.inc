@@ -76,7 +76,7 @@ IMAGE_INSTALL_append += " \
 	imx-boot \
 	fb-test \
 	iproute2 \
-	can-utils \
+	canutils \
 	"
 
 IMAGE_INSTALL_remove += " peak-linux-driver "
