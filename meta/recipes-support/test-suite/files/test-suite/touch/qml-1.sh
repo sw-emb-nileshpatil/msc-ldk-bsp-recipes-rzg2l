@@ -14,7 +14,7 @@
 . /etc/profile.d/weston.sh
 . /etc/profile.d/qt5.sh
 
-export QML="/usr/bin/qt5/qml"
+export QML="/usr/bin/qml"
 
 for idx in {1..10}
 do
