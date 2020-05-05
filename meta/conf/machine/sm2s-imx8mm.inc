@@ -50,7 +50,7 @@ DDR_FIRMWARE_NAME = " \
 	"
 
 # Set Serial console
-SERIAL_CONSOLE = "115200 ttymxc0"
+SERIAL_CONSOLES = "115200;ttymxc0 115200;ttymxc2"
 
 IMAGE_BOOTLOADER = "imx-boot"
 IMAGE_FSTYPES = " wic "
