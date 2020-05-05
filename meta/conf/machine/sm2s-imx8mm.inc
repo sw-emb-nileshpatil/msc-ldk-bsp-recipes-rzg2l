@@ -62,12 +62,6 @@ UBOOT_SUFFIX = "bin"
 UBOOT_MAKE_TARGET = ""
 IMX_BOOT_SEEK = "33"
 IMXBOOT_TARGETS = "flash_board"
-
-IMAGE_BOOTFILES_DEPENDS += "imx-m4-demos:do_deploy"
-IMAGE_BOOTFILES += " \
-	imx8mm_m4_TCM_hello_world.bin \
-	"
-
 IMAGE_INSTALL_append += " \
 	weston \
 	weston-init \
