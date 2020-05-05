@@ -81,6 +81,8 @@ IMAGE_INSTALL_append += " \
 	fb-test \
 	iproute2 \
 	canutils \
+	evtest \
+	python-pyserial \
 	"
 
 IMAGE_INSTALL_remove += " peak-linux-driver "
