@@ -6,6 +6,8 @@
 
 include conf/machine/include/imx-preferred-env.inc
 
+MACHINE_FEATURES += "wifi bluetooth"
+PREFERRED_VERSION_linux-sdio-driver-209a = "20200203"
 
 KERNEL_DEVICETREE = " \
 	msc/imx8mm/msc-sm2s-imx8mm-03N0840E-dsi-avd-tt78qt.dtb \
@@ -77,6 +79,7 @@ IMAGE_INSTALL_append += " \
 	canutils \
 	evtest \
 	python-pyserial \
+	linux-sdio-driver-209a \
 	"
 
 IMAGE_INSTALL_remove += " peak-linux-driver "
