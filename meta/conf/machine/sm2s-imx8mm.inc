@@ -11,9 +11,10 @@ PREFERRED_VERSION_linux-sdio-driver-209a = "20200203"
 
 KERNEL_DEVICETREE = " \
 	msc/imx8mm/msc-sm2s-imx8mm-03N0840E-dsi-avd-tt78qt.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-03N0840E-dsi-rm67191.dtb \
 	msc/imx8mm/msc-sm2s-imx8mm-03N0840E-headless.dtb \
 	\
-	msc/imx8mm/msc-sm2s-imx8mm-03N0880I-dsi-rm67192.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-03N0880I-dsi-rm67191.dtb \
 	msc/imx8mm/msc-sm2s-imx8mm-03N0880I-headless.dtb \
 	\
 	msc/imx8mm/msc-sm2s-imx8mm-03N4200I-headless.dtb \
