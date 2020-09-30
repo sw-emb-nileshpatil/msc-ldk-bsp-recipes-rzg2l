@@ -33,6 +33,11 @@ KERNEL_DEVICETREE = " \
 	msc/imx8mm/msc-sm2s-imx8mm-13N4200I-lvds-ama121a01.dtb \
 	msc/imx8mm/msc-sm2s-imx8mm-13N4200I-lvds-p251hvn01.dtb \
 	\
+	msc-sm2s-imx8mm-24N4200E-headless.dtb \
+	msc-sm2s-imx8mm-24N4200E-lvds-am800480n7.dtb \
+	msc-sm2s-imx8mm-24N4200E-lvds-ama121a01.dtb \
+	msc-sm2s-imx8mm-24N4200E-lvds-p251hvn01.dtb \
+	\
 	msc/imx8mm/msc-sm2s-imx8mm-14N0261I-headless.dtb \
 	msc/imx8mm/msc-sm2s-imx8mm-14N0261I-lvds-ama070a04.dtb \
 	msc/imx8mm/msc-sm2s-imx8mm-14N0261I-lvds-ama121a01.dtb \
