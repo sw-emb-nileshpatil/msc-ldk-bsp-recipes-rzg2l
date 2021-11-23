@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright (C) 2019 AVNET Integrated, MSC Technologies GmbH
+# Copyright (C) 2021 AVNET Embedded, MSC Technologies GmbH
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as
@@ -11,19 +11,9 @@
 # GNU General Public License for more details.
 #
 
-DIR=$(pwd)
+EMMC_DEV="mmcblk0"
+BOOT_PART="${EMMC_DEV}"
+IMAGE="imx-boot-sm2s-imx8mm-sd.bin-flash_board"
 
-case $1 in
-	start)
-		#/home/root/test-suite/start.sh
-	;;
-
-	stop)
-	;;
-
-	*) echo "Usage: $0: (start|stop)"
-	;;
-esac
-
-exit 0
-   
+dd if=${IMAGE} of=/dev/${BOOT_PART} bs=1k seek=33 conv=fsync
+mmc bootpart enable 0 0 /dev/${EMMC_DEV}

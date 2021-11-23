@@ -1,7 +1,11 @@
-# Copyright (C) 2020 AVNET Integrated, MSC Technologies GmbH
+# Copyright (C) 2021 AVNET Embedded, MSC Technologies GmbH
 DESCRIPTION = "i.MX U-Boot suppporting i.MX reference boards."
 
 require ../../../../../meta-msc-ldk-core-recipes.git/msc-git.inc
 require msc-git-src.inc
 
-SRCREV = "5a6b332c52b7c120c55ec5404abe36cd3d1b4b60"
+SRCREV = "7ffbb47d7be01298a2a7315cddf58968b273578f"
+
+EXTRA_OEMAKE += " \
+    DTC_FLAGS=-@ \
+"

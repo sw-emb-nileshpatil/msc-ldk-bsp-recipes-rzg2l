@@ -1,70 +1,63 @@
-# Copyright (C) 2020 AVNET Integrated, MSC Technologies GmbH
-#@TYPE: Machine
-#@NAME: MSC sm2s-imx8mm
-#@SOC: i.MX8M
-#@DESCRIPTION: Machine configuration for sm2s-imx8mm
+# Copyright (C) 2021 AVNET Embedded, MSC Technologies GmbH
+# @TYPE: Machine
+# @NAME: MSC sm2s-imx8mm
+# @SOC: i.MX8M
+# @DESCRIPTION: Machine configuration for sm2s-imx8mm
+# derived from meta-fsl-bsp-releases/meta-bsp/conf/machine/imx8mmevk.conf
 
-include conf/machine/include/imx-preferred-env.inc
+MACHINEOVERRIDES =. "imx-boot-container:mx8:mx8m:mx8mm:"
 
-MACHINE_FEATURES += "wifi bluetooth"
-PREFERRED_VERSION_linux-sdio-driver-209a = "20200203"
+require conf/machine/include/imx-base.inc
+require conf/machine/include/imx-preferred-env.inc
+require conf/machine/include/tune-cortexa53.inc
 
-KERNEL_DEVICETREE = " \
-	msc/imx8mm/msc-sm2s-imx8mm-03N0840E-dsi-avd-tt78qt.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-03N0840E-dsi-rm67191.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-03N0840E-headless.dtb \
-	\
-	msc/imx8mm/msc-sm2s-imx8mm-03N0880I-dsi-rm67191.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-03N0880I-headless.dtb \
-	\
-	msc/imx8mm/msc-sm2s-imx8mm-03N4200I-headless.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-03N4200I-lvds-am800480n7.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-03N4200I-lvds-ama121a01.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-03N4200I-lvds-p251hvn01.dtb \
-	\
-	msc/imx8mm/msc-sm2s-imx8mm-03N4210I-headless.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-03N4210I-lvds-am800480n7.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-03N4210I-lvds-ama121a01.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-03N4210I-lvds-p251hvn01.dtb \
-	\
-	msc/imx8mm/msc-sm2s-imx8mm-13N0810E-headless.dtb \
-        msc/imx8mm/msc-sm2s-imx8mm-13N0810E-lvds-am800480n7.dtb \
-        msc/imx8mm/msc-sm2s-imx8mm-13N0810E-lvds-ama121a01.dtb \
-        msc/imx8mm/msc-sm2s-imx8mm-13N0810E-lvds-p251hvn01.dtb \
-        \
-	msc/imx8mm/msc-sm2s-imx8mm-13N4200I-dsi-tm055jvhg14.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-13N4200I-headless.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-13N4200I-lvds-am800480n7.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-13N4200I-lvds-ama121a01.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-13N4200I-lvds-p251hvn01.dtb \
-	\
-	msc/imx8mm/msc-sm2s-imx8mm-13N4800I-headless.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-13N4800I-dsi-tm055jvhg14.dtb \
-        msc/imx8mm/msc-sm2s-imx8mm-13N4800I-lvds-am800480n7.dtb \
-        msc/imx8mm/msc-sm2s-imx8mm-13N4800I-lvds-ama121a01.dtb \
-        msc/imx8mm/msc-sm2s-imx8mm-13N4800I-lvds-p251hvn01.dtb \ 
-	\
-	msc/imx8mm/msc-sm2s-imx8mm-24N4200E-headless.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-24N4200E-lvds-am800480n7.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-24N4200E-lvds-ama121a01.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-24N4200E-lvds-p251hvn01.dtb \
-	\
-	msc/imx8mm/msc-sm2s-imx8mm-14N0261I-headless.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-14N0261I-lvds-ama070a04.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-14N0261I-lvds-ama121a01.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-14N0261I-lvds-p251hvn01.dtb \
-        \
-        msc/imx8mm/msc-sm2s-imx8mm-03N0280I-headless.dtb \
-        msc/imx8mm/msc-sm2s-imx8mm-03N0280I-lvds-am800480n7.dtb \
-        msc/imx8mm/msc-sm2s-imx8mm-03N0280I-lvds-ama121a01.dtb \
-        msc/imx8mm/msc-sm2s-imx8mm-03N0280I-lvds-p251hvn01.dtb \
-        \
+IMAGE_FSTYPES += "wic wic.bmap"
+
+MACHINE_FEATURES_append_use-nxp-bsp = " pci wifi bluetooth"
+MACHINE_FEATURES_remove_use-nxp-bsp = "nxp8987"
+
+MODULE_DEVICETREE = " \
+	msc/imx8mm/msc-sm2s-imx8mm-03N0280I-module.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-03N0840E-module.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-03N0880I-module.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-03N4200I-module.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-03N4210I-module.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-13N0810E-module.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-13N4200I-module.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-13N4800I-module.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-14N0261I-module.dtb \
+	msc/imx8mm/msc-sm2s-imx8mm-24N4200E-module.dtb \
+	msc/imx8mm/msc-sf385560-imx8mm-03N0810I-module.dtb \
 	"
+
+OVERLAY_DEVICETREE = " \
+	"
+
+KERNEL_DEVICETREE_append_use-nxp-bsp = " \
+		${MODULE_DEVICETREE} \
+		${OVERLAY_DEVICETREE} \
+		"
+
+IMX_DEFAULT_BOOTLOADER_use-nxp-bsp = "u-boot-imx"
+IMX_DEFAULT_BOOTLOADER_use-mainline-bsp = "u-boot-fslc"
+
+IMX_BOOT_SOC_TARGET = "iMX8MM"
+IMX_BOOT_UART_BASE = "0x30860000"
 
 UBOOT_CONFIG ??= "sd"
 UBOOT_CONFIG[sd] = "msc_sm2s_imx8mm_config,sdcard"
-UBOOT_DTB_NAME = "msc-sm2s-imx8mm-qc-base.dtb"
 SPL_BINARY = "spl/u-boot-spl.bin"
+
+ATF_PLATFORM = "imx8mm"
+ATF_LOAD_ADDR = "0x920000"
+
+# Extra firmware package name, that is required to build boot container for fslc bsp
+IMX_EXTRA_FIRMWARE = "firmware-imx-8m"
+
+# Set u-boot DTB
+UBOOT_DTB_NAME = " \
+	msc-sm2s-imx8mm.dtb \
+	"
 
 # Set DDR FIRMWARE
 DDR_FIRMWARE_NAME = " \
@@ -74,41 +67,38 @@ DDR_FIRMWARE_NAME = " \
 	lpddr4_pmu_train_2d_dmem.bin \
 	"
 
+# Set imx-mkimage boot target
+IMXBOOT_TARGETS = " \
+	flash_board \
+	"
+
 # Set Serial console
 SERIAL_CONSOLES = "115200;ttymxc0 115200;ttymxc2"
 
 IMAGE_BOOTLOADER = "imx-boot"
-IMAGE_FSTYPES = " wic "
-
-BOOT_SPACE = "65536"
 
 LOADADDR = ""
 UBOOT_SUFFIX = "bin"
 UBOOT_MAKE_TARGET = ""
 IMX_BOOT_SEEK = "33"
-IMXBOOT_TARGETS = "flash_board"
+
+OPTEE_BIN_EXT = "8mm"
+TEE_LOAD_ADDR = "0xbe000000"
+
 IMAGE_INSTALL_append += " \
-	weston \
-	weston-init \
-	weston-examples \
-	devmem2 \
-	memtester \
-	i210-armtool \
-	i210-config \
-	test-suite \
-	imx-boot \
-	fb-test \
-	iproute2 \
-	canutils \
-	evtest \
-	python-pyserial \
-	linux-sdio-driver-209a \
-	"
+		imx-boot \
+		openssh-sftp openssh-sftp-server \
+		test-suite \
+		linux-sdio-driver-209a \
+		iw wpa-supplicant \
+		msc-ldk-verification-wlan \
+		\
+		python-pyserial python-pybluez \
+		python3-spidev python3-pybluez \
+		\
+		imx-test \
+		packagegroup-fsl-tools-benchmark \
+		stress dhrystone devmem2 memtester evtest fb-test \
+		"
 
-IMAGE_INSTALL_remove += " peak-linux-driver "
 ROOTFS_POSTPROCESS_COMMAND_remove += " remove_boot; "
-
-# temporary
-IMAGE_INSTALL_remove += " \
-	qt-gstreamer \
-	"

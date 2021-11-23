@@ -1,5 +1,4 @@
-# Copyright (C) 2020 AVNET Integrated, MSC Technologies GmbH
+# Copyright (C) 2021 AVNET Embedded, MSC Technologies GmbH
 
 GIT_PATH = "thirdparty/imx-mkimage.git"
-BRANCH = "msc-imx_4.19.35_1.1.0-develop"
-
+BRANCH = "msc-imx_5.10.35_2.0.0-develop"

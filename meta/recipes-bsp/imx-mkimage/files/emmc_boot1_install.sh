@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright (C) 2020 AVNET Integrated, MSC Technologies GmbH
+# Copyright (C) 2021 AVNET Embedded, MSC Technologies GmbH
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as
@@ -13,7 +13,7 @@
 
 EMMC_DEV="mmcblk0"
 BOOT_PART="${EMMC_DEV}boot1"
-IMAGE="imx-boot-sm2s-imx8mm-qc-sd.bin-flash_board"
+IMAGE="imx-boot-sm2s-imx8mm-sd.bin-flash_board"
 
 echo 0 > /sys/block/${BOOT_PART}/force_ro
 dd if=/dev/zero of=/dev/${BOOT_PART} &>/dev/null

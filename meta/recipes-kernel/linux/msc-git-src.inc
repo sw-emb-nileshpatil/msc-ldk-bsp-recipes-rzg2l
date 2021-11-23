@@ -1,5 +1,5 @@
-# Copyright (C) 2020 AVNET Integrated, MSC Technologies GmbH
+# Copyright (C) 2021 AVNET Embedded, MSC Technologies GmbH
 
-BRANCH = "msc-imx_4.19.35_1.1.0-develop"
+BRANCH = "feature/MLDK-2840-to-5.10.35"
 GIT_PATH = "thirdparty/linux-imx.git"
 

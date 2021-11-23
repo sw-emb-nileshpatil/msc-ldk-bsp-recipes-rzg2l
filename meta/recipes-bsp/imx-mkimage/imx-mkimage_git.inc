@@ -1,8 +1,8 @@
-# Copyright (C) 2020 AVNET Integrated, MSC Technologies GmbH
+# Copyright (C) 2021 AVNET Embedded, MSC Technologies GmbH
 
 require ../../../../../meta-msc-ldk-core-recipes.git/msc-git.inc
 require msc-git-src.inc
 
-SRCREV = "ad1c033eba1f5d97624e1183133c275f21895818"
+SRCREV = "4a36f1b21d10f93ae89e85ea81dbb12b3a1fb259"
 
 DEPENDS = "zlib-native openssl-native"

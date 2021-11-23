@@ -1,23 +1,20 @@
-# Copyright (C) 2020 AVNET Integrated, MSC Technologies GmbH
+# Copyright (C) 2021 AVNET Embedded, MSC Technologies GmbH
 
-require recipes-core/images/msc-image-qt5.inc
+require ../../../../../../../meta-msc-arm-extensions.git/recipes-core/images/msc-image-qt5.bb
+include ../../../../recipes-core/images/msc-image-qt5.inc
 
 MSC_PACKAGES = " \
 	linux-hwtests \
 	linux-hwtests-ext \
-	system-test-controller-v2 \
-	"
+	mscio-monitor \
+	msc-ldk-hw-verification \
+"
 
 IMAGE_INSTALL_append += " \
 	qt5-test-application \
 	${MSC_PACKAGES} \
-	"
+"
 
 IMAGE_INSTALL_remove += " \
-	qtwebkit \
 	kernel-devicetree \
-	"
-
-IMAGE_FEATURES_remove += " \
-	ssh-server-dropbear \
-	"
+"
