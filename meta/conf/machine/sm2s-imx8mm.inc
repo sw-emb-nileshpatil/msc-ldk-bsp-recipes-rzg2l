@@ -17,21 +17,29 @@ MACHINE_FEATURES_append_use-nxp-bsp = " pci wifi bluetooth"
 MACHINE_FEATURES_remove_use-nxp-bsp = "nxp8987"
 
 MODULE_DEVICETREE = " \
-	msc/imx8mm/msc-sm2s-imx8mm-03N0280I-module.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-03N0840E-module.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-03N0880I-module.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-03N4200I-module.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-03N4210I-module.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-13N0810E-module.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-13N4200I-module.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-13N4800I-module.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-14N0261I-module.dtb \
-	msc/imx8mm/msc-sm2s-imx8mm-24N4200E-module.dtb \
-	msc/imx8mm/msc-sf385560-imx8mm-03N0810I-module.dtb \
-	"
+		msc/imx8mm/msc-sm2s-imx8mm-03N0280I-module.dtb \
+		msc/imx8mm/msc-sm2s-imx8mm-03N0840E-module.dtb \
+		msc/imx8mm/msc-sm2s-imx8mm-03N0880I-module.dtb \
+		msc/imx8mm/msc-sm2s-imx8mm-03N4200I-module.dtb \
+		msc/imx8mm/msc-sm2s-imx8mm-03N4210I-module.dtb \
+		msc/imx8mm/msc-sm2s-imx8mm-13N0810E-module.dtb \
+		msc/imx8mm/msc-sm2s-imx8mm-13N4200I-module.dtb \
+		msc/imx8mm/msc-sm2s-imx8mm-13N4800I-module.dtb \
+		msc/imx8mm/msc-sm2s-imx8mm-14N0261I-module.dtb \
+		msc/imx8mm/msc-sm2s-imx8mm-24N4200E-module.dtb \
+		msc/imx8mm/msc-sf385560-imx8mm-03N0810I-module.dtb \
+		"
 
 OVERLAY_DEVICETREE = " \
-	"
+		msc/imx8mm/overlay-baseboard-vebo.dtb \
+		msc/imx8mm/overlay-baseboard-ep1.dtb \
+		msc/imx8mm/overlay-baseboard-ep5.dtb \
+		msc/imx8mm/overlay-lvds-ama-070a04.dtb \
+		msc/imx8mm/overlay-lvds-ama-101a01.dtb \
+		msc/imx8mm/overlay-lvds-ama-121a01.dtb \
+		msc/imx8mm/overlay-lvds-auo-p215hvn01.dtb \
+		msc/imx8mm/overlay-dsi-rm67191.dtb \
+		"
 
 KERNEL_DEVICETREE_append_use-nxp-bsp = " \
 		${MODULE_DEVICETREE} \
@@ -56,21 +64,21 @@ IMX_EXTRA_FIRMWARE = "firmware-imx-8m"
 
 # Set u-boot DTB
 UBOOT_DTB_NAME = " \
-	msc-sm2s-imx8mm.dtb \
-	"
+		msc-sm2s-imx8mm.dtb \
+		"
 
 # Set DDR FIRMWARE
 DDR_FIRMWARE_NAME = " \
-	lpddr4_pmu_train_1d_imem.bin \
-	lpddr4_pmu_train_1d_dmem.bin \
-	lpddr4_pmu_train_2d_imem.bin \
-	lpddr4_pmu_train_2d_dmem.bin \
-	"
+		lpddr4_pmu_train_1d_imem.bin \
+		lpddr4_pmu_train_1d_dmem.bin \
+		lpddr4_pmu_train_2d_imem.bin \
+		lpddr4_pmu_train_2d_dmem.bin \
+		"
 
 # Set imx-mkimage boot target
 IMXBOOT_TARGETS = " \
-	flash_board \
-	"
+		flash_board \
+		"
 
 # Set Serial console
 SERIAL_CONSOLES = "115200;ttymxc0 115200;ttymxc2"
