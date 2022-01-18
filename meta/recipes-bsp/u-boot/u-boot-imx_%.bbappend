@@ -4,7 +4,7 @@ DESCRIPTION = "i.MX U-Boot suppporting i.MX reference boards."
 require ../../../../../meta-msc-ldk-core-recipes.git/msc-git.inc
 require msc-git-src.inc
 
-SRCREV = "5d6715ea04103afe2f74b0e189d14504c74ca727"
+SRCREV = "ef16ec1354fc530ba84f2a829482df837343923d"
 
 EXTRA_OEMAKE += " \
     DTC_FLAGS=-@ \
