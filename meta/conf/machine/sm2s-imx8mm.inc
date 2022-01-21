@@ -40,6 +40,7 @@ OVERLAY_DEVICETREE = " \
 		msc/imx8mm/overlay-lvds-auo-p215hvn01.dtb \
 		msc/imx8mm/overlay-dsi-rm67191.dtb \
 		msc/imx8mm/overlay-spi-flash.dtb \
+		msc/imx8mm/overlay-cam-ov5640.dtb \
 		"
 
 KERNEL_DEVICETREE_append_use-nxp-bsp = " \
