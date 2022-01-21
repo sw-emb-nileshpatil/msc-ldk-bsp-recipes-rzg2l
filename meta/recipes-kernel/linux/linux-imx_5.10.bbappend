@@ -4,7 +4,7 @@
 require linux-imx-bsp.inc
 
 DEFCONFIG = "msc_sm2s_imx8mm_defconfig"
-SRCREV = "c629b6e8d323c30240e6466efc3414c7a3b8fe57"
+SRCREV = "1598491738f626bf68c961190da221d639641136"
 
 do_copy_defconfig () {
 	install -d ${B}
