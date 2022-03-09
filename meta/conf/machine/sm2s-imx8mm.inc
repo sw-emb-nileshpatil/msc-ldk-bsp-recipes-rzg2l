@@ -28,6 +28,7 @@ MODULE_DEVICETREE = " \
 		msc/imx8mm/msc-sm2s-imx8mm-14N0261I-module.dtb \
 		msc/imx8mm/msc-sm2s-imx8mm-24N4200E-module.dtb \
 		msc/imx8mm/msc-sf385560-imx8mm-03N0810I-module.dtb \
+		msc/imx8mm/asc-sm2s-imx8mm-03N0800E-module.dtb \
 		"
 
 OVERLAY_DEVICETREE = " \
