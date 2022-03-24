@@ -41,6 +41,7 @@ OVERLAY_DEVICETREE = " \
 		msc/imx8mm/overlay-lvds-ama-121a01.dtb \
 		msc/imx8mm/overlay-lvds-auo-p215hvn01.dtb \
 		msc/imx8mm/overlay-dsi-rm67191.dtb \
+		msc/imx8mm/overlay-dsi-boe-gv101wum-ls0.dtb \
 		msc/imx8mm/overlay-spi-flash.dtb \
 		msc/imx8mm/overlay-cam-ov5640.dtb \
 		"
