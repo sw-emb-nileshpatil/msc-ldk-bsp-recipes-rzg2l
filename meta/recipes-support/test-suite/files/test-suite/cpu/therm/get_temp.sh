@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright (C) 2019 AVNET Integrated, MSC Technologies GmbH
+# Copyright (C) 2021 AVNET Embedded, MSC Technologies GmbH
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as
@@ -11,5 +11,6 @@
 # GNU General Public License for more details.
 #
 
-export BRIGHTNESS=${1:-26}
-echo "${BRIGHTNESS}" > /sys/devices/platform/lcd0_backlight/backlight/lcd0_backlight/brightness
+DATE=$(date "+%H:%M:%S")
+TEMP=$(($(cat /sys/devices/virtual/thermal/thermal_zone0/temp)/1000))
+printf "%s: %.2f \n" "${DATE}" ${TEMP}

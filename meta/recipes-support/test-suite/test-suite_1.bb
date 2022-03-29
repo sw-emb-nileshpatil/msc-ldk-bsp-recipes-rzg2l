@@ -1,4 +1,4 @@
-# Copyright (C) 2021 AVNET Embedded, MSC Technologies GmbH
+# Copyright (C) 2022 Avnet Embedded GmbH
 
 AUTHOR = "Waldemar Glensk <waldemar.glensk@avnet.com>"
 LICENSE = "GPL-2.0"

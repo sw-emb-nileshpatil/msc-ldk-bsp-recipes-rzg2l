@@ -13,4 +13,4 @@
 
 . /etc/profile.d/weston.sh
 
-gst-launch-1.0 videotestsrc pattern=checkers-1 ! glimagesink
+glmark2-es2-wayland -b ideas --fullscreen --run-forever &>/dev/null &

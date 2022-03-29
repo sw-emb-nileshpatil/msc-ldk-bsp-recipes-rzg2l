@@ -11,6 +11,5 @@
 # GNU General Public License for more details.
 #
 
-. /etc/profile.d/weston.sh
-
-gst-launch-1.0 videotestsrc pattern=checkers-1 ! glimagesink
+export BRIGHTNESS=${1:-255}
+echo "${BRIGHTNESS}" > /sys/devices/platform/lcd0_backlight/backlight/lcd0_backlight/brightness

@@ -11,6 +11,8 @@
 # GNU General Public License for more details.
 #
 
-. /etc/profile.d/weston.sh
-
-gst-launch-1.0 videotestsrc pattern=checkers-1 ! glimagesink
+printf "=========================================================== \n"
+cat /sys/devices/platform/soc@0/30800000.bus/30a20000.i2c/i2c-0/0-002d/sn65dsi83_stat
+printf "=========================================================== \n"
+cat /sys/devices/platform/soc@0/30800000.bus/30a20000.i2c/i2c-0/0-002d/sn65dsi83_reg
+printf "=========================================================== \n"
