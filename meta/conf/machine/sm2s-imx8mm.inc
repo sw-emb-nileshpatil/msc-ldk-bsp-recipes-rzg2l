@@ -39,6 +39,7 @@ OVERLAY_DEVICETREE = " \
 		msc/imx8mm/overlay-baseboard-ep5.dtb \
 		msc/imx8mm/overlay-lvds-ama-070a04.dtb \
 		msc/imx8mm/overlay-lvds-ama-101a01.dtb \
+		msc/imx8mm/overlay-lvds-ama-101a07.dtb \
 		msc/imx8mm/overlay-lvds-ama-121a01.dtb \
 		msc/imx8mm/overlay-lvds-auo-p215hvn01.dtb \
 		msc/imx8mm/overlay-dsi-rm67191.dtb \
