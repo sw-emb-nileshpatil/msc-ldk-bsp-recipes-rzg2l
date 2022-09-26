@@ -1,5 +1,5 @@
 #
-#    @copyright  Copyright (C) 2021 by AVNET Embedded, MSC Technologies GmbH
+#    @copyright  Copyright (C) 2022 by AVNET Embedded, MSC Technologies GmbH
 #
 #    Alle Rechte vorbehalten. Dieses Dokument ist Eigentum der
 #    MSC Technologies GmbH und unterliegt dem Schutz des Urheberrechtes. Die
@@ -29,6 +29,6 @@ all:
 $(IMAGE_TYPES_FOR_WAYLAND):
 	@./build.sh bitbake ${BITBAKE_FLAGS} $@
 
-.PHONY: msc-sm2s-imx8mm-wayland
-msc-sm2s-imx8mm-wayland:
+.PHONY: msc-sm2s-am6254-wayland
+msc-sm2s-am6254-wayland:
 	make ${IMAGE_TYPES_FOR_WAYLAND}
