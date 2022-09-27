@@ -1,5 +1,4 @@
 Relative GIT Repository,Layer subdirectory in repository,Tag/Branch to checkout in develop MSC-LDK branch
-bitbake,,dunfell-08.03.00.005-msc
 meta-processor-sdk,,dunfell-08.03.00.005-msc
 meta-arago,meta-arago-distro,dunfell-08.03.00.005-msc
 meta-arago,meta-arago-extras,dunfell-08.03.00.005-msc
