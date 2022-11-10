@@ -1,14 +1,14 @@
 Relative GIT Repository,Layer subdirectory in repository,Tag/Branch to checkout in develop MSC-LDK branch
-meta-qt5,,dunfell-08.03.00.005-msc
-meta-ti,,dunfell-08.03.00.005-msc
-meta-openembedded,meta-networking,dunfell-08.03.00.005-msc
-meta-openembedded,meta-python,dunfell-08.03.00.005-msc
-meta-openembedded,meta-oe,dunfell-08.03.00.005-msc
-meta-openembedded,meta-gnome,dunfell-08.03.00.005-msc
-meta-openembedded,meta-webserver,dunfell-08.03.00.005-msc
-meta-openembedded,meta-multimedia,dunfell-08.03.00.005-msc
-meta-openembedded,meta-filesystems,dunfell-08.03.00.005-msc
-meta-openembedded,meta-perl,dunfell-08.03.00.005-msc
-yocto,meta,dunfell-08.03.00.005-msc
-meta-arm,meta-arm,dunfell-08.03.00.005-msc
-meta-arm,meta-arm-toolchain,dunfell-08.03.00.005-msc
+meta-qt5,,renesas-3.0.0-msc
+meta-virtualization,,renesas-3.0.0-msc
+meta-gplv2,,renesas-3.0.0-msc
+meta-rz-features,,renesas-3.0.0-msc
+meta-renesas,,renesas-3.0.0-msc
+meta-openembedded,meta-networking,renesas-3.0.0-msc
+meta-openembedded,meta-python,renesas-3.0.0-msc
+meta-openembedded,meta-oe,renesas-3.0.0-msc
+meta-openembedded,meta-multimedia,renesas-3.0.0-msc
+meta-openembedded,meta-filesystems,renesas-3.0.0-msc
+yocto,meta,renesas-3.0.0-msc
+yocto,meta-poky,renesas-3.0.0-msc
+yocto,meta-yocto-bsp,renesas-3.0.0-msc
