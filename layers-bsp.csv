@@ -9,6 +9,3 @@ meta-openembedded,meta-python,renesas-3.0.0-msc
 meta-openembedded,meta-oe,renesas-3.0.0-msc
 meta-openembedded,meta-multimedia,renesas-3.0.0-msc
 meta-openembedded,meta-filesystems,renesas-3.0.0-msc
-yocto,meta,renesas-3.0.0-msc
-yocto,meta-poky,renesas-3.0.0-msc
-yocto,meta-yocto-bsp,renesas-3.0.0-msc
