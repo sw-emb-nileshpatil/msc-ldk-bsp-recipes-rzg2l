@@ -1,7 +1,6 @@
 Relative GIT Repository,Layer subdirectory in repository,Tag/Branch to checkout in develop MSC-LDK branch
 meta-qt5,,renesas-3.0.0-msc
 meta-virtualization,,renesas-3.0.0-msc
-meta-gplv2,,renesas-3.0.0-msc
 meta-rz-features,,renesas-3.0.0-msc
 meta-renesas,,renesas-3.0.0-msc
 meta-openembedded,meta-networking,renesas-3.0.0-msc
