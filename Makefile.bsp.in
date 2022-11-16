@@ -18,7 +18,7 @@
 #    All rights are reserved in the event of the grant of a patent or the
 #    registration of a utility model or design.
 
-IMAGE_TYPES_FOR_ALL ?= msc-image-base
+IMAGE_TYPES_FOR_ALL ?= core-image-weston
 IMAGE_TYPES_FOR_WAYLAND ?= msc-image-weston msc-image-qt5
 IMAGE_TYPES ?= ${IMAGE_TYPES_FOR_ALL}
 
