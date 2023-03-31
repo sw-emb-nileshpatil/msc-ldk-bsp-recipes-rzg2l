@@ -5,7 +5,7 @@ KERVER = "5.10"
 FILESEXTRAPATHS_prepend := "${THISDIR}/${KERVER}:"
 
 SRC_URI += " \
-		file://0009-sm2s-rzg2ul-Added-Device-Tree-changes-for-renesas.patch \
+		file://0001-Added-peripheral-support-for-sm2s-rzg2ul-board.patch \
 	   	file://sm2s.cfg \
 "
 
