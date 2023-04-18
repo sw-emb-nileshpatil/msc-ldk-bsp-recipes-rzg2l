@@ -1,84 +1,130 @@
-From 2646c3f4a46cfeeb79e906aa654f837778dd2ea7 Mon Sep 17 00:00:00 2001
+From d25beb5ea4bb6b78cce57f25902eddc8524820c3 Mon Sep 17 00:00:00 2001
 From: Maulik Manvar <maulik.manvar@softwebsolutions.com>
-Date: Wed, 16 Nov 2022 12:26:08 +0530
+Date: Tue, 11 Apr 2023 15:15:50 +0530
 Subject: [PATCH] Added peripheral support for sm2s-rzg2ul board
 
 -Added DTS changes to bring up peripheral support like eeprom,
-da7212 codec,RTC,Temperature sensor,SD Card, EMMC, CSI interface.
+da7212 codec,RTC,Temperature sensor,SD Card, EMMC,CSI,CAN,PWM interfaces.
 
 Signed-off-by: Maulik Manvar <maulik.manvar@softwebsolutions.com>
 ---
- arch/arm64/boot/dts/renesas/r9a07g043.dtsi    |  30 +
- .../boot/dts/renesas/r9a07g043u11-smarc.dts   |   5 +-
- .../renesas/sm2s_rzg2ul-smarc-display.dtsi    | 977 ++++++++++++++++++
- .../boot/dts/renesas/sm2s_rzg2ul-smarc.dtsi   | 829 +++++++++++++++
- 4 files changed, 1839 insertions(+), 2 deletions(-)
+ .../boot/dts/renesas/r9a07g043u11-smarc.dts   |   70 +-
+ arch/arm64/boot/dts/renesas/r9a07g043u11.dtsi |   13 +
+ .../renesas/sm2s_rzg2ul-smarc-display.dtsi    | 1067 +++++++++++++++++
+ .../boot/dts/renesas/sm2s_rzg2ul-smarc.dtsi   |  829 +++++++++++++
+ 4 files changed, 1972 insertions(+), 7 deletions(-)
+ create mode 100755 arch/arm64/boot/dts/renesas/r9a07g043u11.dtsi
  create mode 100644 arch/arm64/boot/dts/renesas/sm2s_rzg2ul-smarc-display.dtsi
  create mode 100644 arch/arm64/boot/dts/renesas/sm2s_rzg2ul-smarc.dtsi
 
-diff --git a/arch/arm64/boot/dts/renesas/r9a07g043.dtsi b/arch/arm64/boot/dts/renesas/r9a07g043.dtsi
-index edb00c2bf3d9..a67bb56d953f 100644
---- a/arch/arm64/boot/dts/renesas/r9a07g043.dtsi
-+++ b/arch/arm64/boot/dts/renesas/r9a07g043.dtsi
-@@ -447,6 +447,36 @@
- 			status = "disabled";
- 		};
- 
-+		sci0: serial@1004d000 {
-+			compatible = "renesas,r9a07g043-sci", "renesas,sci";
-+			reg = <0 0x1004d000 0 0x400>;
-+			interrupts = <GIC_SPI 405 IRQ_TYPE_LEVEL_HIGH>,
-+				     <GIC_SPI 406 IRQ_TYPE_EDGE_RISING>,
-+                                     <GIC_SPI 407 IRQ_TYPE_EDGE_RISING>,
-+                                     <GIC_SPI 408 IRQ_TYPE_LEVEL_HIGH>;
-+			interrupt-names = "eri", "rxi", "txi", "tei";
-+			clocks = <&cpg CPG_MOD R9A07G043_SCI0_CLKP>;
-+			clock-names = "fck";
-+			power-domains = <&cpg>;
-+			resets = <&cpg R9A07G043_SCI0_RST>;
-+			status = "disabled";
-+		};
-+
-+               sci1: serial@1004d400 {
-+                       compatible = "renesas,r9a07g043-sci", "renesas,sci";
-+                       reg = <0 0x1004d400 0 0x400>;
-+                       interrupts = <GIC_SPI 409 IRQ_TYPE_LEVEL_HIGH>,
-+                                    <GIC_SPI 410 IRQ_TYPE_EDGE_RISING>,
-+                                    <GIC_SPI 411 IRQ_TYPE_EDGE_RISING>,
-+                                    <GIC_SPI 412 IRQ_TYPE_LEVEL_HIGH>;
-+                       interrupt-names = "eri", "rxi", "txi", "tei";
-+                       clocks = <&cpg CPG_MOD R9A07G043_SCI1_CLKP>;
-+                       clock-names = "fck";
-+                       power-domains = <&cpg>;
-+                       resets = <&cpg R9A07G043_SCI1_RST>;
-+                       status = "disabled";
-+                };
-+
- 		canfd: can@10050000 {
- 			compatible = "renesas,r9a07g043-canfd", "renesas,rzg2l-canfd";
- 			reg = <0 0x10050000 0 0x8000>;
 diff --git a/arch/arm64/boot/dts/renesas/r9a07g043u11-smarc.dts b/arch/arm64/boot/dts/renesas/r9a07g043u11-smarc.dts
-index b82378003244..a7c2ccd54633 100644
+index 121e55282d18..a7c2ccd54633 100644
 --- a/arch/arm64/boot/dts/renesas/r9a07g043u11-smarc.dts
 +++ b/arch/arm64/boot/dts/renesas/r9a07g043u11-smarc.dts
-@@ -7,8 +7,9 @@
+@@ -1,15 +1,71 @@
+-// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++// SPDX-License-Identifier: GPL-2.0
+ /*
+- * Device Tree Source for the RZ/G2UL Type-1 SMARC EVK board
++ * Device Tree Source for the RZG2UL Single A55 Evaluation board
+  *
+  * Copyright (C) 2022 Renesas Electronics Corp.
+  */
  
  /dts-v1/;
- #include "r9a07g043u11.dtsi"
+-#include "r9a07g043.dtsi"
 -#include "rzg2ul-smarc.dtsi"
 -
++#include "r9a07g043u11.dtsi"
 +//#include "rzg2ul-smarc.dtsi"
 +//#include "sm2s_rzg2ul-smarc.dtsi"
 +#include "sm2s_rzg2ul-smarc-display.dtsi"
  / {
- 	model = "Evaluation board based on r9a07g043u11";
- 	compatible = "renesas,r9a07g043u11-smarc",
+-	model = "Renesas SMARC EVK based on r9a07g043u11";
+-	compatible = "renesas,smarc-evk", "renesas,r9a07g043u11", "renesas,r9a07g043";
++	model = "Evaluation board based on r9a07g043u11";
++	compatible = "renesas,r9a07g043u11-smarc",
++		     "renesas,r9a07g043",
++		     "renesas,r9a07g043u11";
++
++	memory@48000000 {
++		device_type = "memory";
++		/* first 128MB is reserved for secure area. */
++		reg = <0x0 0x48000000 0x0 0x38000000>;
++	};
++
++	reserved-memory {
++		#address-cells = <2>;
++		#size-cells = <2>;
++		ranges;
++
++		global_cma: linux,cma@58000000 {
++			compatible = "shared-dma-pool";
++			linux,cma-default;
++			reusable;
++			reg = <0x0 0x58000000 0x0 0x10000000>;
++		};
++		mmp_reserved: linux,multimedia {
++			compatible = "shared-dma-pool";
++			reusable;
++			reg = <0x00000000 0x68000000 0x0 0x8000000>;
++		};
++	};
++
++	mmngr {
++		compatible = "renesas,mmngr";
++		memory-region = <&mmp_reserved>;
++	};
++
++	mmngrbuf {
++		compatible = "renesas,mmngrbuf";
++	};
++
++	vspm_if {
++		compatible = "renesas,vspm_if";
++	};
++};
++
++&ehci0 {
++	memory-region = <&global_cma>;
++};
++
++&ohci0 {
++	memory-region = <&global_cma>;
++};
++
++&ehci1 {
++	memory-region = <&global_cma>;
++};
++
++&ohci1 {
++	memory-region = <&global_cma>;
+ };
+diff --git a/arch/arm64/boot/dts/renesas/r9a07g043u11.dtsi b/arch/arm64/boot/dts/renesas/r9a07g043u11.dtsi
+new file mode 100755
+index 000000000000..0a8c3cd505d1
+--- /dev/null
++++ b/arch/arm64/boot/dts/renesas/r9a07g043u11.dtsi
+@@ -0,0 +1,13 @@
++// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++/*
++ * Device Tree Source for the RZ/G2UL R9A07G043U11 SoC specific parts
++ *
++ * Copyright (C) 2022 Renesas Electronics Corp.
++ */
++
++/dts-v1/;
++#include "r9a07g043.dtsi"
++
++/ {
++	compatible = "renesas,r9a07g043ul1", "renesas,r9a07g043";
++};
 diff --git a/arch/arm64/boot/dts/renesas/sm2s_rzg2ul-smarc-display.dtsi b/arch/arm64/boot/dts/renesas/sm2s_rzg2ul-smarc-display.dtsi
 new file mode 100644
-index 000000000000..20a1bf61c59d
+index 000000000000..d97a5cb3ddac
 --- /dev/null
 +++ b/arch/arm64/boot/dts/renesas/sm2s_rzg2ul-smarc-display.dtsi
-@@ -0,0 +1,977 @@
+@@ -0,0 +1,1067 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
 + * Device Tree Source for the RZG2UL Evaluation Board Kit
@@ -94,7 +140,7 @@ index 000000000000..20a1bf61c59d
 + * Please change below MACROs corespondingly to SW1 setting
 + */
 +
-+#define	SW_DISP_EN	1
++#define	SW_DISP_EN	0
 +
 +/ {
 +	aliases {
@@ -202,7 +248,6 @@ index 000000000000..20a1bf61c59d
 +
 +		codec_dai: simple-audio-card,codec {
 +			sound-dai = <&da7213_codec>;
-+			clocks = <&versa3 3>;
 +		};
 +	};
 +
@@ -249,8 +294,6 @@ index 000000000000..20a1bf61c59d
 +                regulator-name = "SDHI1 VccQ";
 +                regulator-min-microvolt = <1800000>;
 +                regulator-max-microvolt = <3300000>;
-+
-+                gpios = <&pinctrl RZG2L_GPIO(6, 1) GPIO_ACTIVE_HIGH>;
 +
 +                gpios-states = <1>;
 +                states = <3300000 1
@@ -310,7 +353,7 @@ index 000000000000..20a1bf61c59d
 +	clk_ext_camera: clk_ext_camera {
 +		compatible = "fixed-clock";
 +		#clock-cells = <0>;
-+		clock-frequency = <24000000>;
++		clock-frequency = <12000000>;
 +	};
 +
 +	ov5645_vdddo_1v8: 1p8v {
@@ -379,7 +422,7 @@ index 000000000000..20a1bf61c59d
 +	&canfd {
 +		pinctrl-0 = <&canfd1_pins>;
 +		pinctrl-names = "default";
-+		status = "disabled";
++		status = "okay";
 +		channel1 {
 +			status = "okay";
 +		};
@@ -404,7 +447,7 @@ index 000000000000..20a1bf61c59d
 +
 +	phy0: ethernet-phy@0 {
 +		reg = <0>;
-+                ti,rx-internal-delay = <0x7>;
++                ti,rx-internal-delay = <0x8>;
 +                ti,fifo-depth = <0x01>;
 +                ti,min-output-impedance;
 +	};
@@ -418,7 +461,7 @@ index 000000000000..20a1bf61c59d
 +&i2c0 {
 +	pinctrl-0 = <&i2c0_pins>;
 +	pinctrl-names = "default";
-+
++        clock-frequency = <400000>;
 +	status = "okay";
 +
 +       module_eeprom@50 {
@@ -453,6 +496,7 @@ index 000000000000..20a1bf61c59d
 +&i2c1 {
 +	pinctrl-0 = <&i2c1_pins>;
 +	pinctrl-names = "default";
++        clock-frequency = <400000>;
 +
 +	status = "okay";
 +
@@ -623,7 +667,7 @@ index 000000000000..20a1bf61c59d
 +		reg = <0x3c>;
 +		clock-names = "xclk";
 +		clocks = <&clk_ext_camera>;
-+		clock-frequency = <24000000>;
++		clock-frequency = <12000000>;
 +		DOVDD-supply = <&ov5645_vdddo_1v8>;
 +		AVDD-supply = <&ov5645_vdda_2v8>;
 +		DVDD-supply = <&ov5645_vddd_1v5>;
@@ -631,13 +675,13 @@ index 000000000000..20a1bf61c59d
 +		vdda-supply = <&ov5645_vdda_2v8>;
 +		vddd-supply = <&ov5645_vddd_1v5>;*/
 +
-+		enable-gpios = <&exp1 1 GPIO_ACTIVE_HIGH>;
-+		reset-gpios = <&exp1 3 GPIO_ACTIVE_LOW>;
++		enable-gpios = <&exp1 1 GPIO_ACTIVE_LOW>;
++		reset-gpios = <&exp1 3 GPIO_ACTIVE_HIGH>;
 +
 +		port {
 +			ov5645_to_csi: endpoint {
 +		       		clock-lanes = <0>;
-+		       		data-lanes = <1 2 3 4>;
++		       		data-lanes = <1 2>;
 +		       		remote-endpoint = <&csi2_in>;
 +                 		bus-width = <8>;
 +		                hsync-active = <0>;
@@ -666,22 +710,102 @@ index 000000000000..20a1bf61c59d
 +};
 +
 +&usb2_phy1 {
-+	pinctrl-0 = <&usb1_pins>;
-+	pinctrl-names = "default";
++	/*pinctrl-0 = <&usb1_pins>;
++	pinctrl-names = "default";*/
 +
 +	status = "okay";
 +};
 +
++
 +&spi0 {
-+	    pinctrl-0 = <&spi0_pins>;
-+	    pinctrl-names = "default";
-+	    status = "okay";
++	pinctrl-0 = <&spi0_pins>;
++	pinctrl-names = "default";
++	status = "okay";
++	/*flash@0 {
++		compatible="winbond,w25q64dw","jedec,spi-nor";
++		reg = <0>;
++		m25p,fast-read;
++		spi-max-frequency = <50000000>;
++		spi-tx-bus-width = <1>;
++		spi-rx-bus-width = <1>;
++		partitions {
++			compatible="fixed-partitions";
++			#address-cells = <1>;
++			#size-cells = <1>;
++			partition@000000 {
++				label = "spi0_bl2";
++				reg = <0x00000000 0x0001D200>;
++				read-only;
++			};
++			partition@01D200 {
++				label = "spi0_fip";
++				reg = <0x0001D200 0x001C2E00>;
++				read-only;
++			};
++			partition@1E0000 {
++				label = "spi0_env";
++				reg = <0x001E0000 0x00020000>;
++				read-only;
++			};
++			partition@200000 {
++				label = "spi0_test-area";
++				reg = <0x00200000 0x00E00000>;
++			};
++		};
++	};*/
++
++	spidev@0x00 {
++		compatible="winbond,w25q64dw","jedec,spi-nor";
++		spi-max-frequency = <100000>;
++		reg = <0>;
++	};
 +};
 +
++
 +&spi2 {
-+	    pinctrl-0 = <&spi2_pins>;
-+	    pinctrl-names = "default";
-+	    status = "okay";
++        pinctrl-0 = <&spi2_pins>;
++        pinctrl-names = "default";
++        status = "okay";
++        /*flash@0 {
++                compatible="winbond,w25q64dw","jedec,spi-nor";
++                reg = <0>;
++                m25p,fast-read;
++                spi-max-frequency = <50000000>;
++                spi-tx-bus-width = <1>;
++                spi-rx-bus-width = <1>;
++                partitions {
++                        compatible="fixed-partitions";
++                        #address-cells = <1>;
++                        #size-cells = <1>;
++                        partition@000000 {
++                                label = "spi0_bl2";
++                                reg = <0x00000000 0x0001D200>;
++                                read-only;
++                        };
++                        partition@01D200 {
++                                label = "spi0_fip";
++                                reg = <0x0001D200 0x001C2E00>;
++                                read-only;
++                        };
++                        partition@1E0000 {
++                                label = "spi0_env";
++                                reg = <0x001E0000 0x00020000>;
++                                read-only;
++                        };
++                        partition@200000 {
++                                label = "spi0_test-area";
++                                reg = <0x00200000 0x00E00000>;
++                        };
++                };
++        };*/
++
++        spidev@0x00 {
++                compatible="winbond,w25q64dw","jedec,spi-nor";
++                spi-max-frequency = <100000>;
++                reg = <0>;
++        };
++
++
 +};
 +
 +&scif0 {
@@ -889,7 +1013,7 @@ index 000000000000..20a1bf61c59d
 +	};
 +
 +	usb1_pins: usb1 {
-+		pinmux = <RZG2L_PORT_PINMUX(6, 0, 1)>; /* OVC */
++		pinmux = <RZG2L_PORT_PINMUX(6, 0, 1)>;
 +	};
 +
 +
@@ -938,8 +1062,12 @@ index 000000000000..20a1bf61c59d
 +	};
 +	
 +	sci0_pins: sci0 {
-+               pinmux = <RZG2L_PORT_PINMUX(2, 2, 5)>, /*SCI0_TXD*/
++               pinmux =  <RZG2L_PORT_PINMUX(2, 2, 5)>, /*SCI0_TXD*/
 +                         <RZG2L_PORT_PINMUX(2, 3, 5)>; /* SCI0_RXD*/ 
++	};
++
++	mtu7_pins:mtu7 {
++	               pinmux =  <RZG2L_PORT_PINMUX(6, 0, 5)>;
 +	};
 +
 +};
@@ -1027,7 +1155,7 @@ index 000000000000..20a1bf61c59d
 +		port {
 +			csi2_in: endpoint {
 +				clock-lanes = <0>;
-+				data-lanes = <1 2 3 4>;
++				data-lanes = <1 2>;
 +				remote-endpoint = <&ov5645_to_csi>;
 +			};
 +		};
@@ -1053,6 +1181,14 @@ index 000000000000..20a1bf61c59d
 +};
 +
 +&mtu3 {
++	pinctrl-0 = <&mtu7_pins>;
++	pinctrl-names = "default";
++	pwm_mode1 = <7 0>;
++	pwm_complementary = <7 0>;
++        #pwm-cells = <2>;
++        clocks = <&cpg CPG_MOD R9A07G043_MTU_X_MCK_MTU3>;
++        clock-names = "fck";
++	/*pwm-params = <MTU_PWM_NORMAL 0 50>;*/
 +	status = "okay";
 +};
 +
@@ -1892,5 +2028,5 @@ index 000000000000..cbe61e1670f6
 +};
 +
 -- 
-2.17.1
+2.25.1
 
