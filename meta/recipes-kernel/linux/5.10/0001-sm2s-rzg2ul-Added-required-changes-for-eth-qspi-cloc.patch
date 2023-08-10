@@ -1,0 +1,316 @@
+From d8a90fd132bad89d70c59d753a5ab1676947a881 Mon Sep 17 00:00:00 2001
+From: Anil Patel <anil.patel@softwebsolutions.com>
+Date: Fri, 23 Jun 2023 11:13:58 +0530
+Subject: [PATCH] sm2s-rzg2ul: Added required changes for eth, qspi, clocks
+
+Signed-off-by: Anil Patel <anil.patel@softwebsolutions.com>
+---
+ .../renesas/sm2s_rzg2ul-smarc-display.dtsi    | 164 +++++++-----------
+ 1 file changed, 59 insertions(+), 105 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/renesas/sm2s_rzg2ul-smarc-display.dtsi b/arch/arm64/boot/dts/renesas/sm2s_rzg2ul-smarc-display.dtsi
+index 8d2199f1e..1a4696560 100644
+--- a/arch/arm64/boot/dts/renesas/sm2s_rzg2ul-smarc-display.dtsi
++++ b/arch/arm64/boot/dts/renesas/sm2s_rzg2ul-smarc-display.dtsi
+@@ -7,6 +7,7 @@
+ 
+ #include <dt-bindings/pinctrl/rzg2l-pinctrl.h>
+ #include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/net/ti-dp83867.h>
+ 
+ /*
+  * If Display is enabled then SW_DISP_EN should be 1 otherwise 0.
+@@ -123,7 +124,7 @@
+         clk_ext_audio_codec: clock-codec {
+                 compatible = "fixed-clock";
+                 #clock-cells = <0>;
+-                clock-frequency = <12288000>;
++                clock-frequency = <11288000>;
+         };
+ 
+ 
+@@ -251,7 +252,7 @@
+                 status = "okay";
+ 
+                 panel-timing {
+-                        clock-frequency = <25505280>;
++                        clock-frequency = <75000000>;
+                         hactive = <800>;
+                         vactive = <480>;
+                         hback-porch = <30>;
+@@ -332,20 +333,23 @@
+ };
+ 
+ &eth0 {
+-	pinctrl-0 = <&ether0_pins>;
++	pinctrl-0 = <&eth0_pins>;
+ 	pinctrl-names = "default";
+ 	phy-handle = <&phy0>;
+-	phy-mode = "rgmii-rxid";
++	phy-mode = "rgmii-id";
+ 	status = "okay";
+ 
+ 	phy0: ethernet-phy@0 {
++		compatible = "ethernet-phy-ieee802.3-c22";
+ 		reg = <0>;
+-                ti,rx-internal-delay = <0x8>;
+-                ti,fifo-depth = <0x01>;
+-                ti,min-output-impedance;
++                ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_00_NS>;
++                ti,tx-internal-delay = <DP83867_RGMIIDCTL_2_00_NS>;
++                ti,fifo-depth = <DP83867_PHYCR_FIFO_DEPTH_4_B_NIB>;
++		ti,min-output-impedance;
+ 	};
+ };
+ 
++
+ &hsusb {
+ 	dr_mode = "otg";
+ 	status = "okay";
+@@ -434,25 +438,47 @@
+                         dcdc2:DCDC2 {
+                                 regulator-name = "VCC_ARM_0V9";
+                                 regulator-always-on;
+-                                regulator-min-microvolt = <900000>;
++                                regulator-min-microvolt = <3000000>;
+                                 regulator-max-microvolt = <3300000>;
+                         };
+-                        ldo1:LDO1 {
+-                                regulator-name = "VCC_PHY_0V9";
++
++                        dcdc3:DCDC3 {
++                                regulator-name = "VCC_DDR_1V2";
+                                 regulator-always-on;
+                                 regulator-min-microvolt = <900000>;
++                                regulator-max-microvolt = <1200000>;
++                        };
++
++                        dcdc4:DCDC4 {
++                                regulator-name = "VCC_SYS_1V8";
++                                regulator-always-on;
++                                regulator-min-microvolt = <1600000>;
+                                 regulator-max-microvolt = <1800000>;
+                         };
++
++                        ldo1:LDO1 {
++                                regulator-name = "VCC_PHY_2V5";
++                                regulator-always-on;
++                                regulator-min-microvolt = <2000000>;
++                                regulator-max-microvolt = <2500000>;
++                        };
+                         ldo2:LDO2 {
+-                                regulator-name = "VCC_LDO12_1V2";
++                                regulator-name = "VCC_LDO2_1V2";
+                                 regulator-always-on;
+                                 regulator-min-microvolt = <1000000>;
+                                 regulator-max-microvolt = <1800000>;
+                         };
++			ldo3:LDO3 {
++                                regulator-name = "VCC_LDO3_1V0";
++                                regulator-always-on;
++                                regulator-min-microvolt = <900000>;
++                                regulator-max-microvolt = <1000000>;
++                        };
++
+ 		};
+ 	};
+ 
+-        exp2: gpio@22 {
++        exp1: gpio@22 {
+                 compatible = "ti,tca6424";
+                 reg = <0x22>;
+                 gpio-controller;
+@@ -466,7 +492,7 @@
+                 pinctrl-0 = <&main_gpio1_ioexp_intr_pins_default>;*/
+         };
+ 
+-        exp1: gpio@23 {
++        exp2: gpio@23 {
+                 compatible = "ti,tca6424";
+                 reg = <0x23>;
+                 gpio-controller;
+@@ -480,25 +506,6 @@
+                 pinctrl-0 = <&main_gpio1_ioexp_intr_pins_default>;*/
+         };
+ 
+-        versa3: versa3@68 {
+-                compatible = "renesas,5p35023";
+-                reg = <0x68>;
+-                #clock-cells = <1>;
+-                clocks = <&x1_clk>;
+-                clock-names = "x1";
+-                assigned-clocks = <&versa3 0>,
+-                                   <&versa3 1>,
+-                                   <&versa3 2>,
+-                                   <&versa3 3>,
+-                                   <&versa3 4>,
+-                                   <&versa3 5>;
+-                assigned-clock-rates =  <12288000>, <25000000>,
+-                                        <12000000>, <11289600>,
+-                                        <11289600>, <24000000>;
+-                clock-divider-read-only = <1>, <1>, <1>, <1>, <1>;
+-                clock-flags = <2176>, <2176>, <2176>, <2052>, <2176>, <2048>;
+-        };
+-
+         tmp103: tmp103@75 {
+                 compatible = "ti,tmp103";
+                 reg = <0x75>;
+@@ -512,7 +519,7 @@
+ };
+ 
+ &i2c3 {
+-	clock-frequency = <100000>;
++	clock-frequency = <400000>;
+ 	pinctrl-0 = <&i2c3_pins>;
+ 	pinctrl-names = "default";
+ 	status = "okay";
+@@ -530,9 +537,6 @@
+ 		vdda-supply = <&ov5645_vdda_2v8>;
+ 		vddd-supply = <&ov5645_vddd_1v5>;*/
+ 
+-		enable-gpios = <&exp1 1 GPIO_ACTIVE_LOW>;
+-		reset-gpios = <&exp1 3 GPIO_ACTIVE_HIGH>;
+-
+ 		port {
+ 			ov5645_to_csi: endpoint {
+ 		       		clock-lanes = <0>;
+@@ -576,42 +580,10 @@
+ 	pinctrl-0 = <&spi0_pins>;
+ 	pinctrl-names = "default";
+ 	status = "okay";
+-	/*flash@0 {
+-		compatible="winbond,w25q64dw","jedec,spi-nor";
+-		reg = <0>;
+-		m25p,fast-read;
+-		spi-max-frequency = <50000000>;
+-		spi-tx-bus-width = <1>;
+-		spi-rx-bus-width = <1>;
+-		partitions {
+-			compatible="fixed-partitions";
+-			#address-cells = <1>;
+-			#size-cells = <1>;
+-			partition@000000 {
+-				label = "spi0_bl2";
+-				reg = <0x00000000 0x0001D200>;
+-				read-only;
+-			};
+-			partition@01D200 {
+-				label = "spi0_fip";
+-				reg = <0x0001D200 0x001C2E00>;
+-				read-only;
+-			};
+-			partition@1E0000 {
+-				label = "spi0_env";
+-				reg = <0x001E0000 0x00020000>;
+-				read-only;
+-			};
+-			partition@200000 {
+-				label = "spi0_test-area";
+-				reg = <0x00200000 0x00E00000>;
+-			};
+-		};
+-	};*/
+ 
+ 	spidev@0x00 {
+ 		compatible="winbond,w25q64dw","jedec,spi-nor";
+-		spi-max-frequency = <100000>;
++		spi-max-frequency = <25000000>;
+ 		reg = <0>;
+ 	};
+ };
+@@ -621,42 +593,10 @@
+         pinctrl-0 = <&spi2_pins>;
+         pinctrl-names = "default";
+         status = "okay";
+-        /*flash@0 {
+-                compatible="winbond,w25q64dw","jedec,spi-nor";
+-                reg = <0>;
+-                m25p,fast-read;
+-                spi-max-frequency = <50000000>;
+-                spi-tx-bus-width = <1>;
+-                spi-rx-bus-width = <1>;
+-                partitions {
+-                        compatible="fixed-partitions";
+-                        #address-cells = <1>;
+-                        #size-cells = <1>;
+-                        partition@000000 {
+-                                label = "spi0_bl2";
+-                                reg = <0x00000000 0x0001D200>;
+-                                read-only;
+-                        };
+-                        partition@01D200 {
+-                                label = "spi0_fip";
+-                                reg = <0x0001D200 0x001C2E00>;
+-                                read-only;
+-                        };
+-                        partition@1E0000 {
+-                                label = "spi0_env";
+-                                reg = <0x001E0000 0x00020000>;
+-                                read-only;
+-                        };
+-                        partition@200000 {
+-                                label = "spi0_test-area";
+-                                reg = <0x00200000 0x00E00000>;
+-                        };
+-                };
+-        };*/
+ 
+         spidev@0x00 {
+                 compatible="winbond,w25q64dw","jedec,spi-nor";
+-                spi-max-frequency = <100000>;
++                spi-max-frequency = <25000000>;
+                 reg = <0>;
+         };
+ 
+@@ -730,7 +670,7 @@
+ 			 <RZG2L_PORT_PINMUX(6, 2, 3)>; /* RX */
+ 	};
+ 
+-	ether0_pins: eth0 {
++	eth0_pins: eth0 {
+ 		pinmux = 
+ 			 <RZG2L_PORT_PINMUX(4, 3, 1)>, /* ET0_MDC */
+ 			 <RZG2L_PORT_PINMUX(4, 4, 1)>, /* ET0_MDIO */
+@@ -888,6 +828,18 @@
+ 		                 <RZG2L_PORT_PINMUX(7, 2, 3)>, /*RSPI2_MISO*/
+ 		                 <RZG2L_PORT_PINMUX(7, 3, 3)>; /*RSPI2_SSL*/
+ 	};
++
++	qspi0_pins: qspi0 {
++		qspi0-data {
++			pins = "QSPI0_IO0", "QSPI0_IO1", "QSPI0_IO2", "QSPI0_IO3";
++			power-source = <3300>;
++		};
++
++		qspi0-ctrl {
++			pins = "QSPI0_SPCLK", "QSPI0_SSL";
++			power-source = <3300>;
++		};
++	};
+ 	
+ 	scif0_pins: scif0 {
+ 			pinmux = <RZG2L_PORT_PINMUX(6, 4, 6)>, /* TxD */
+@@ -928,7 +880,11 @@
+ 
+ };
+ 
++
+ &sbc {
++	pinctrl-0 = <&qspi0_pins>;
++	pinctrl-names = "default";
++
+ 	status = "okay";
+ 
+ 	flash@0 {
+@@ -968,8 +924,6 @@
+ };
+ 
+ 
+-
+-
+ //SD Card
+ &sdhi0 {
+ 	pinctrl-0 = <&sdhi0_pins>;
+-- 
+2.17.1
+

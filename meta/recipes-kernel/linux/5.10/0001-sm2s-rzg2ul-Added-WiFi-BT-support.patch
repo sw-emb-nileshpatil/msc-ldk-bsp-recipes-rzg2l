@@ -1,0 +1,307 @@
+From 7a73ec7c9dad3a831f91225361f8ce324e1895a1 Mon Sep 17 00:00:00 2001
+From: Anil Patel <anil.patel@softwebsolutions.com>
+Date: Mon, 26 Jun 2023 05:38:32 +0000
+Subject: [PATCH] sm2s-rzg2ul: Added WiFi-BT support
+
+Signed-off-by: Anil Patel <anil.patel@softwebsolutions.com>
+---
+ .../renesas/sm2s_rzg2ul-smarc-display.dtsi    | 181 ++++++++++++++----
+ 1 file changed, 139 insertions(+), 42 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/renesas/sm2s_rzg2ul-smarc-display.dtsi b/arch/arm64/boot/dts/renesas/sm2s_rzg2ul-smarc-display.dtsi
+index 1a4696560..052893290 100644
+--- a/arch/arm64/boot/dts/renesas/sm2s_rzg2ul-smarc-display.dtsi
++++ b/arch/arm64/boot/dts/renesas/sm2s_rzg2ul-smarc-display.dtsi
+@@ -15,6 +15,7 @@
+  */
+ 
+ #define	SW_DISP_EN	1
++#define	WIFI_EN	1
+ 
+ / {
+ 	aliases {
+@@ -134,34 +135,52 @@ vdd_sd0: regulator-1 {
+                 regulator-min-microvolt = <3300000>;
+                 regulator-max-microvolt = <3300000>;
+                 regulator-boot-on;
+-                enable-active-high;
++		regulator-always-on;
+                 vin-supply = <&reg_3p3v>;
+         };
+ 
++#if WIFI_EN
++/*
++	bt_reset: bt-reset {
++		compatible = "gpio-reset";
++		reset-gpios = <&exp2 10 GPIO_ACTIVE_LOW>;  /* BT_EN_DEV */
++/*		reset-delay-us = <1000>;
++		#reset-cells = <0>;
++	};
++*/
++
++	wlan_pwrseq: wlan_pwrseq {
++		compatible = "mmc-pwrseq-simple";
++		reset-gpios = <&exp2 11 GPIO_ACTIVE_LOW>;  /* WIFI_EN_DEV */
++		clocks = <&osc_32k>;
++                clock-names = "ext_clock";
++		post-power-on-delay-ms = <80>;
++	};
++
+ 	vccq_sdhi0: regulator-vccq-sdhi0 {
+-		    compatible = "regulator-gpio";
+-		    regulator-name = "SDHI0 VccQ";
+-		    regulator-min-microvolt = <1800000>;
+-		    regulator-max-microvolt = <3300000>;
+-		    vin-supply = <&ldo2>;
+-                    startup-delay-us = <100>;
+-                    u-boot,off-on-delay-us = <12000>;
+-                    gpios-states = <0>;
+-                    states = <3300000 1
+-                          1800000 0>;
+-	};
+-
+-        vccq_sdhi1: regulator-vccq-sdhi1 {
+-                compatible = "regulator-gpio";
+-
+-                regulator-name = "SDHI1 VccQ";
+-                regulator-min-microvolt = <1800000>;
+-                regulator-max-microvolt = <3300000>;
++		compatible = "regulator-fixed";
++		regulator-name = "SDHI0 VccQ";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		vin-supply = <&ldo2>;
++		regulator-always-on;
++	};
+ 
+-                gpios-states = <1>;
+-                states = <3300000 1
+-                          1800000 0>;
++	osc_32k: osc_32k {
++                compatible = "fixed-clock";
++                #clock-cells = <0>;
++                clock-frequency = <32768>;
++                clock-output-names = "osc_32k";
+         };
++#else
++	vccq_sdhi0: regulator-vccq-sdhi0 {
++		compatible = "regulator-fixed";
++		regulator-name = "SDHI0 VccQ";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++		vin-supply = <&ldo2>;
++	};
++#endif
+ 	
+ 	vring-ctl0@43000000 {
+ 		compatible = "vring_uio";
+@@ -242,6 +261,35 @@ ov5645_vddd_1v5: 1p5v {
+ 		regulator-max-microvolt = <1500000>;
+ 		regulator-always-on;
+ 	};
++/*
++        gpio-test-en-hog {
++                gpio-hog;
++                gpios = <&exp1 16 GPIO_ACTIVE_HIGH>;
++                output-low;
++                line-name = "gpio_test_en";
++        };
++
++	gpio-eth0-pwr-en-hog {
++                gpio-hog;
++                gpios = <&exp2 3 GPIO_ACTIVE_HIGH>;
++                output-high;
++                line-name = "gpio_eth0_pwr_en";
++        };
++
++	wifi-en-hog {
++		gpio-hog;
++		gpios = <&exp2 11 GPIO_ACTIVE_HIGH>;
++		output-low;
++		line-name = "wifi_en";
++	};
++
++	bt-en-hog {
++		gpio-hog;
++		gpios = <&exp2 10 GPIO_ACTIVE_HIGH>;
++                output-low;
++                line-name = "bt_en";
++        };
++*/
+ 
+ 	panel {
+                 compatible = "panel-lvds";
+@@ -462,12 +510,22 @@ ldo1:LDO1 {
+                                 regulator-min-microvolt = <2000000>;
+                                 regulator-max-microvolt = <2500000>;
+                         };
++
++#if WIFI_EN
+                         ldo2:LDO2 {
+-                                regulator-name = "VCC_LDO2_1V2";
++                                regulator-name = "VCC_LDO2_3V3";
+                                 regulator-always-on;
+-                                regulator-min-microvolt = <1000000>;
++                                regulator-min-microvolt = <3300000>;
++                                regulator-max-microvolt = <3300000>;
++                        };
++#else
++                        ldo2:LDO2 {
++                                regulator-name = "VCC_LDO2_1V8";
++                                regulator-always-on;
++                                regulator-min-microvolt = <1800000>;
+                                 regulator-max-microvolt = <1800000>;
+                         };
++#endif
+ 			ldo3:LDO3 {
+                                 regulator-name = "VCC_LDO3_1V0";
+                                 regulator-always-on;
+@@ -483,13 +541,6 @@ exp1: gpio@22 {
+                 reg = <0x22>;
+                 gpio-controller;
+                 #gpio-cells = <2>;
+-                interrupt-parent = <&pinctrl>;
+-                /*interrupts = <23 IRQ_TYPE_EDGE_FALLING>;
+-                interrupt-controller;
+-                #interrupt-cells = <2>;
+-
+-                pinctrl-names = "default";
+-                pinctrl-0 = <&main_gpio1_ioexp_intr_pins_default>;*/
+         };
+ 
+         exp2: gpio@23 {
+@@ -497,13 +548,6 @@ exp2: gpio@23 {
+                 reg = <0x23>;
+                 gpio-controller;
+                 #gpio-cells = <2>;
+-                interrupt-parent = <&pinctrl>;
+-                /*interrupts = <23 IRQ_TYPE_EDGE_FALLING>;
+-                interrupt-controller;
+-                #interrupt-cells = <2>;
+-
+-                pinctrl-names = "default";
+-                pinctrl-0 = <&main_gpio1_ioexp_intr_pins_default>;*/
+         };
+ 
+         tmp103: tmp103@75 {
+@@ -533,9 +577,6 @@ ov5640: ov5640@3c {
+ 		DOVDD-supply = <&ov5645_vdddo_1v8>;
+ 		AVDD-supply = <&ov5645_vdda_2v8>;
+ 		DVDD-supply = <&ov5645_vddd_1v5>;
+-		/*vdddo-supply = <&ov5645_vdddo_1v8>;
+-		vdda-supply = <&ov5645_vdda_2v8>;
+-		vddd-supply = <&ov5645_vddd_1v5>;*/
+ 
+ 		port {
+ 			ov5645_to_csi: endpoint {
+@@ -562,7 +603,7 @@ &usb2_phy0 {
+ 	pinctrl-names = "default";
+ 	
+ 	//Enable VBUS for USB0
+-	gpio = <&exp2 15 GPIO_ACTIVE_HIGH>;	
++	gpio = <&exp2 13 GPIO_ACTIVE_HIGH>;	
+ 	
+ 	vbus-supply = <&vbus0_usb2>;
+ 	status = "okay";
+@@ -613,13 +654,26 @@ &scif0 {
+ &scif1 {
+     pinctrl-0 = <&scif1_pins>;
+     pinctrl-names = "default";
++    uart-has-rtscts;
+     status = "okay";
+ };
+ 
++/* BT_UART */
+ &scif2 {
+     pinctrl-0 = <&scif2_pins>;
+     pinctrl-names = "default";
++    uart-has-rtscts;
++    /* resets = <&bt_reset>;*/
+     status = "okay";
++
++    bluetooth {
++        compatible = "brcm,bcm43438-bt";
++        shutdown-gpios = <&exp2 10 GPIO_ACTIVE_HIGH>;
++        clocks = <&osc_32k>;
++        clock-names = "extclk";
++        max-speed = <2000000>;
++    };
++
+ };
+ 
+ 
+@@ -699,7 +753,21 @@ i2c1_pins: i2c1 {
+ 	};
+ 
+ 
++#if WIFI_EN
++//For WiFi
++	sdhi0_pins: sd0 {
++		sd0_data {
++			pins =  "SD0_DATA0", "SD0_DATA1", "SD0_DATA2",
++				"SD0_DATA3";
++			power-source  = <3300>;
++		};
+ 
++		sd0_ctrl {
++			pins = "SD0_CLK", "SD0_CMD";
++			power-source = <3300>;
++		};
++	};
++#else
+ /* Support pinctrl for uSD function of SDHI0*/
+ //For SD Card
+ 	sdhi0_pins: sd0 {
+@@ -714,6 +782,7 @@ sd0_ctrl {
+ 			power-source = <1800>;
+ 		};
+ 	};
++#endif
+ 	
+ // For MMC
+ 	sdhi1_pins: sd1 {
+@@ -924,6 +993,33 @@ partition@200000 {
+ };
+ 
+ 
++#if WIFI_EN
++//WiFi
++&sdhi0 {
++	#address-cells = <1>;
++	#size-cells = <0>;
++	pinctrl-0 = <&sdhi0_pins>;
++	pinctrl-names = "default";
++	vmmc-supply = <&vdd_sd0>;
++	vqmmc-supply = <&vccq_sdhi0>;
++	bus-width = <4>;
++	no-1-8-v;	/* force 3.3V VIO */
++	non-removable;
++	disable-wp;
++	mmc-pwrseq = <&wlan_pwrseq>;
++	pm-ignore-notify;
++	cap-power-off-card;
++	/* WiFi firmware requires power to be kept while in suspend */
++        keep-power-in-suspend;
++
++	status = "okay";
++
++	brcmf: bcrmf@1 {
++		reg = <1>;
++		compatible = "brcm,bcm4329-fmac";
++	};
++};
++#else
+ //SD Card
+ &sdhi0 {
+ 	pinctrl-0 = <&sdhi0_pins>;
+@@ -934,6 +1030,7 @@ &sdhi0 {
+ 	status = "okay";
+ 	disable-wp;
+ };
++#endif
+ 
+ //eMMC
+ &sdhi1 {
+-- 
+2.24.4
+
